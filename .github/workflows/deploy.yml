@@ -34,5 +34,5 @@ jobs:
             cd /opt/traccar/web
             rm -rf * # Clear the existing files
             echo "Copying built files..."
-            scp -r -o StrictHostKeyChecking=no $GITHUB_WORKSPACE/build/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/opt/traccar/web
+            scp -r -o StrictHostKeyChecking=no $GITHUB_WORKSPACE/dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/opt/traccar/web
             echo "Deployment complete!"
