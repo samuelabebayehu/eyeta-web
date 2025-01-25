@@ -31,11 +31,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd /root
-            git pull origin main
-            pwd
+            echo "Deploying application..."
+            cd /root/app/eyeta-web
             npm install --production
-            npm run build
-            cp ./build/* /opt/traccar/web/
-            systemctl restart traccar
+            cp ./build/* /opt/traccar/web
             rm -rf ./build
