@@ -1,12 +1,12 @@
-name: Build and Deploy to VPS
+name: Build and Deploy
 
 on:
   push:
     branches:
-      - main # Trigger on push to the main branch
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,19 +24,20 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: List workspace contents
+        run: ls -la ${{ github.workspace }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: ${{ github.workspace }}/build
+
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/scp-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.PASSWORD }}
-          script: |
-            cd $GITHUB_WORKSPACE
-            ls -la
-            cd /opt/traccar/web
-            rm -rf * # Clear the existing files
-            echo "Copying built files..."
-            ls $GITHUB_WORKSPACE/
-            pwd
-            scp -r -o StrictHostKeyChecking=no $GITHUB_WORKSPACE/dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/opt/traccar/web
-            echo "Deployment complete!"
+          password: ${{ secrets.password }}
+          source: ${{ github.workspace }}/build/*
+          target: /app
