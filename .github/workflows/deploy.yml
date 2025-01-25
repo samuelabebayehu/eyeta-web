@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd $GITHUB_WORKSPACE/src
+            cd $GITHUB_WORKSPACE
             ls -la
             cd /opt/traccar/web
             rm -rf * # Clear the existing files
