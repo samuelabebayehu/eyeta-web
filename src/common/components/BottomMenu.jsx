@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  Paper, BottomNavigation, BottomNavigationAction, Menu, MenuItem, Typography, Badge,
+  Paper, BottomNavigation, BottomNavigationAction, Menu, MenuItem, Typography, Badge, styled
 } from '@mui/material';
+
 
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -15,6 +16,24 @@ import { sessionActions } from '../../store';
 import { useTranslation } from './LocalizationProvider';
 import { useRestriction } from '../util/permissions';
 import { nativePostMessage } from './NativeInterface';
+
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  boxShadow: theme.shadows[4], // Subtle shadow
+}));
+// Custom styled components for BottomNavigation and BottomNavigationAction
+const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main, // Indigo background
+  color: theme.palette.common.white, // White text for contrast
+}));
+
+const StyledBottomNavigationAction = styled(BottomNavigationAction)(({ theme }) => ({
+  color: theme.palette.common.white, // White text for unselected items
+  '&.Mui-selected': {
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main, // Orange color for selected item
+  },
+}));
 
 const BottomMenu = () => {
   const navigate = useNavigate();
@@ -99,9 +118,9 @@ const BottomMenu = () => {
   };
 
   return (
-    <Paper square elevation={3}>
-      <BottomNavigation value={currentSelection()} onChange={handleSelection} showLabels>
-        <BottomNavigationAction
+    <StyledPaper square elevation={3}>
+      <StyledBottomNavigation value={currentSelection()} onChange={handleSelection} showLabels>
+        <StyledBottomNavigationAction
           label={t('mapTitle')}
           icon={(
             <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
@@ -111,15 +130,15 @@ const BottomMenu = () => {
           value="map"
         />
         {!disableReports && (
-          <BottomNavigationAction label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
+          <StyledBottomNavigationAction label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
         )}
-        <BottomNavigationAction label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
+        <StyledBottomNavigationAction label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
         {readonly ? (
-          <BottomNavigationAction label={t('loginLogout')} icon={<ExitToAppIcon />} value="logout" />
+          <StyledBottomNavigationAction label={t('loginLogout')} icon={<ExitToAppIcon />} value="logout" />
         ) : (
-          <BottomNavigationAction label={t('settingsUser')} icon={<PersonIcon />} value="account" />
+          <StyledBottomNavigationAction label={t('settingsUser')} icon={<PersonIcon />} value="account" />
         )}
-      </BottomNavigation>
+      </StyledBottomNavigation>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
         <MenuItem onClick={handleAccount}>
           <Typography color="textPrimary">{t('settingsUser')}</Typography>
@@ -128,7 +147,7 @@ const BottomMenu = () => {
           <Typography color="error">{t('loginLogout')}</Typography>
         </MenuItem>
       </Menu>
-    </Paper>
+    </StyledPaper>
   );
 };
 
