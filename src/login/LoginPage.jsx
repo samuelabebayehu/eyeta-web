@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import {
   useMediaQuery, Select, MenuItem, FormControl, Button, TextField, Link, Snackbar, IconButton, Tooltip, Box,
+  InputAdornment
 } from '@mui/material';
+import { AccountCircle, Visibility, VisibilityOff, Key } from '@mui/icons-material';
 import ReactCountryFlag from 'react-country-flag';
 import makeStyles from '@mui/styles/makeStyles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -59,6 +61,7 @@ const LoginPage = () => {
   const languageList = Object.entries(languages).map((values) => ({ code: values[0], country: values[1].country, name: values[1].name }));
 
   const [failed, setFailed] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [email, setEmail] = usePersistedState('loginEmail', '');
   const [password, setPassword] = useState('');
@@ -74,6 +77,14 @@ const LoginPage = () => {
 
   const [announcementShown, setAnnouncementShown] = useState(false);
   const announcement = useSelector((state) => state.session.server.announcement);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const generateLoginToken = async () => {
     if (nativeEnvironment) {
@@ -184,6 +195,13 @@ const LoginPage = () => {
           autoFocus={!email}
           onChange={(e) => setEmail(e.target.value)}
           helperText={failed && 'Invalid username or password'}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           required
@@ -191,10 +209,28 @@ const LoginPage = () => {
           label={t('userPassword')}
           name="password"
           value={password}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           autoComplete="current-password"
           autoFocus={!!email}
           onChange={(e) => setPassword(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Key />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         {codeEnabled && (
           <TextField

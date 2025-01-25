@@ -538,7 +538,7 @@
     "notificatorMail": "Eposta",
     "notificatorSms": "SMS Mesajı",
     "notificatorFirebase": "Firebase",
-    "notificatorTraccar": "Traccar",
+    "notificatorTraccar": "Eyeta",
     "notificatorTelegram": "Telegram",
     "notificatorPushover": "Pushover",
     "reportReplay": "Tekrar oynat",
