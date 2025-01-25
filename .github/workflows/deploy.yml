@@ -1,4 +1,4 @@
-name: Build and Deploy Eyeta Modern Web App
+name: Build and Deploy to VPS
 
 on:
   push:
@@ -31,8 +31,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            echo "Deploying application..."
-            cd /root/app/eyeta-web
-            npm install --production
-            cp ./build/* /opt/traccar/web
-            rm -rf ./build
+            cd /opt/traccar/web
+            rm -rf * # Clear the existing files
+            echo "Copying built files..."
+            scp -r -o StrictHostKeyChecking=no $GITHUB_WORKSPACE/build/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/opt/traccar/web
+            echo "Deployment complete!"
