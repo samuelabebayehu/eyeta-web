@@ -1,4 +1,4 @@
-name: Build and Deploy Traccar Modern Web App
+name: Build and Deploy Eyeta Modern Web App
 
 on:
   push:
