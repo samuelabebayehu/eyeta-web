@@ -33,6 +33,7 @@ jobs:
           script: |
             cd /root
             git pull origin main
+            pwd
             npm install --production
             npm run build
             cp ./build/* /opt/traccar/web/
