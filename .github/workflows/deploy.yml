@@ -40,4 +40,4 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.password }}
           source: ${{ github.workspace }}/build/*
-          target: ${{ secrets.VPS_HOST }}/app
+          target: /root/app
