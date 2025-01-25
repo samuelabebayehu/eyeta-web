@@ -39,5 +39,16 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.password }}
-          source: ${{ github.workspace }}/build/github/workspace/build*
+          source: ${{ github.workspace }}/build/*
           target: /root/app
+
+      - name: Execute SSH commands
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.password }}
+          script: |
+            echo "Deploying application..."
+            cp -r /root/app/github/workspace/build/* /opt/traccar/web
+            systemctl restart traccar
