@@ -81,6 +81,8 @@ import nl from "../../resources/l10n/nl.json";
 import "dayjs/locale/nl";
 import nn from "../../resources/l10n/nn.json";
 import "dayjs/locale/nn";
+import or from "../../resources/l10n/or.json";
+import "dayjs/locale/am";
 import pl from "../../resources/l10n/pl.json";
 import "dayjs/locale/pl";
 import pt from "../../resources/l10n/pt.json";
@@ -97,6 +99,8 @@ import sk from "../../resources/l10n/sk.json";
 import "dayjs/locale/sk";
 import sl from "../../resources/l10n/sl.json";
 import "dayjs/locale/sl";
+import sm from "../../resources/l10n/sm.json";
+import "dayjs/locale/am";
 import sq from "../../resources/l10n/sq.json";
 import "dayjs/locale/sq";
 import sr from "../../resources/l10n/sr.json";
@@ -105,6 +109,8 @@ import sv from "../../resources/l10n/sv.json";
 import "dayjs/locale/sv";
 import ta from "../../resources/l10n/ta.json";
 import "dayjs/locale/ta";
+import tg from "../../resources/l10n/tg.json";
+import "dayjs/locale/am";
 import th from "../../resources/l10n/th.json";
 import "dayjs/locale/th";
 import tr from "../../resources/l10n/tr.json";
@@ -160,6 +166,7 @@ const languages = {
   ne: { data: ne, country: "NP", name: "नेपाली" },
   nl: { data: nl, country: "NL", name: "Nederlands" },
   nn: { data: nn, country: "NO", name: "Norsk nynorsk" },
+  or: { data: or, country: "ET", name: "Afaan Oromo" },
   pl: { data: pl, country: "PL", name: "Polski" },
   pt: { data: pt, country: "PT", name: "Português" },
   ptBR: { data: ptBR, country: "BR", name: "Português (Brasil)" },
@@ -168,10 +175,12 @@ const languages = {
   si: { data: si, country: "LK", name: "සිංහල" },
   sk: { data: sk, country: "SK", name: "Slovenčina" },
   sl: { data: sl, country: "SI", name: "Slovenščina" },
+  sm: { data: sm, country: "SO", name: "Somali" },
   sq: { data: sq, country: "AL", name: "Shqipëria" },
   sr: { data: sr, country: "RS", name: "Srpski" },
   sv: { data: sv, country: "SE", name: "Svenska" },
   ta: { data: ta, country: "IN", name: "தமிழ்" },
+  tg: { data: tg, country: "ET", name: "Tigregna" },
   th: { data: th, country: "TH", name: "ไทย" },
   tr: { data: tr, country: "TR", name: "Türkçe" },
   uk: { data: uk, country: "UA", name: "Українська" },
